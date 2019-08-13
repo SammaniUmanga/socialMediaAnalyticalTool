@@ -1,0 +1,84 @@
+  <!-- <h1>Registration Form</h1><br> -->
+<h3>We innovate, to grow and diversify your business.</h3>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <h5 *ngIf="success">Your Form Is Valid</h5>
+
+  <label>
+    First Name:
+    <input type="text" formControlName="fname" placeholder="First Name">
+    <div *ngIf="submitted && registerForm.controls.fname.errors" class="error">
+      <div *ngIf="registerForm.controls.fname.errors.required">Your name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Last Names:
+    <input type="text" formControlName="lname" placeholder="Last Name">
+    <div *ngIf="submitted && registerForm.controls.lname.errors" class="error">
+      <div *ngIf="registerForm.controls.lname.errors.required">Last Name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Pages User name:
+    <input type="text" formControlName="uname" placeholder="User Name">
+    <div *ngIf="submitted && registerForm.controls.uname.errors" class="error">
+      <div *ngIf="registerForm.controls.uname.errors.required">User Name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Email:
+    <input type="text" formControlName="email" placeholder="Email">
+    <div *ngIf="submitted && registerForm.controls.email.errors" class="error">
+      <div *ngIf="registerForm.controls.email.errors.required">Enter Your Email Address Correctly</div>
+    </div>
+  </label>
+
+  <label>
+    Password:
+    <input type="text" formControlName="password" placeholder="Minimum of 6 Charactors">
+    <div *ngIf="submitted && registerForm.controls.password.errors" class="error">
+      <div *ngIf="registerForm.controls.password.errors.required">Enter Your Password Correctly</div>
+    </div>
+  </label>
+
+  <div class="row m-t-10">
+      <div class="col-lg-6">
+        <p><small>I agree to the <a href="#" class="text-info">Pages Terms</a> and <a href="#" class="text-info">Privacy</a>.</small></p>
+      </div>
+      <div class="col-lg-6 text-right">
+        <a href="#" class="text-info small">Help? Contact Support</a>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-cons m-t-10" type="submit">Create a new account</button>
+    <button class="btn bold btn-cons m-t-10" type="submit">I have an account</button>
+  <!-- <input type="submit" value="Login" class="btn bold btn-cons m-t-10 cta"> -->
+
+</form>
+
+<div *ngIf="submitted" class="results">
+  <strong>First Name</strong>
+  <span>{{registerForm.controls.fname.value}}</span>
+</div>
+
+<div *ngIf="submitted" class="results">
+  <strong>Last Name</strong>
+  <span>{{registerForm.controls.lname.value}}</span>
+</div>
+
+<div *ngIf="submitted" class="results">
+  <strong>User Name</strong>
+  <span>{{registerForm.controls.uname.value}}</span>
+</div>
+
+<div *ngIf="submitted" class="results">
+  <strong>Email</strong>
+  <span>{{registerForm.controls.email.value}}</span>
+</div>
+
+<div *ngIf="submitted" class="results">
+  <strong>Password</strong>
+  <span>{{registerForm.controls.password.value}}</span>
+</div>

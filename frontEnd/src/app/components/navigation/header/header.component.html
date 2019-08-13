@@ -1,0 +1,53 @@
+<mat-toolbar>
+<!-- <mat-toolbar color="accent"> -->
+  <div fxHide.gt-xs>
+      <button mat-icon-button  (click)="onToggleSidenav()">
+          <mat-icon style="color:white">menu</mat-icon>
+      </button>
+  </div> 
+ 
+  <div>
+     <a routerLink="/home">Sentiment Tool</a>
+  </div>
+  <span class="spacer"></span>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+      <!-- <a fxLayout fxLayoutGap="15px" class="navigation-items" routerLink="/owner">Owner Actions</a> -->
+  
+      <a fxLayout fxLayoutGap="15px" class="navigation-items"  routerLink="/account">
+        <button mat-icon-button ><mat-icon>account_circle</mat-icon>
+        </button>
+      </a>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon style="color:white">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Account Settings</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Help Center</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Contact Support</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Sign Out</span>
+        </button>
+      </mat-menu>
+ 
+  </div>
+</mat-toolbar>
+
+
+<!-- <a mat-list-item href="#">My Account
+    <button mat-icon-button ><mat-icon>account_circle</mat-icon>
+    </button>
+  </a>
+  <a mat-list-item routerLink="/login">Logout
+    <button mat-icon-button ><mat-icon>power_settings_new</mat-icon>
+    </button>
+  </a> -->

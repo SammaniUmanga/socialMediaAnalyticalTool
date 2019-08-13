@@ -1,0 +1,50 @@
+<h1>Login Form</h1>
+
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+
+  <h5 *ngIf="success">Your Form Is Valid</h5>
+
+  <label>
+    User Name:
+    <input type="text" formControlName="uname" placeholder="User Name" >
+    <div *ngIf="submitted && messageForm.controls.uname.errors" class="error">
+      <div *ngIf="messageForm.controls.uname.errors.required">Your name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Password:
+    <input type="text" formControlName="password" placeholder="Credentials" >
+    <div *ngIf="submitted && messageForm.controls.password.errors" class="error">
+      <div *ngIf="messageForm.controls.password.errors.required">Enter Your Password Correctly</div>
+    </div>
+  </label>
+
+  <div class="row">
+      <div class="col-md-6 no-padding sm-p-l-10">
+        <div class="checkbox ">
+          <input type="checkbox" value="1" id="checkbox1">
+          <label for="checkbox1">Keep Me Signed in</label>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <a href="#" class="text-info small">Help? Contact Support</a>
+      </div>
+    </div>
+    <!-- END Form Control-->
+    <button class="btn bold btn-cons m-t-10" type="submit">Sign in</button>
+    <!-- <input type="submit" value="Login" class="btn bold btn-cons m-t-10 cta"> -->
+
+</form>
+<br>
+<button class="btn btn-primary btn-cons m-t-10" type="submit"><i class="fa fa-facebook"></i> Continue with Facebook</button>
+
+<div *ngIf="submitted" class="results">
+  <strong>User Name</strong>
+  <span>{{messageForm.controls.uname.value}}</span>
+</div>
+
+<div *ngIf="submitted" class="results">
+    <strong>Password</strong>
+    <span>{{messageForm.controls.password.value}}</span>
+  </div>
