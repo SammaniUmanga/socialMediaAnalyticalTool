@@ -1,4 +1,4 @@
-<h1>Login Form</h1>
+<!-- <h1>Login Form</h1>
 
 <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
 
@@ -31,9 +31,9 @@
         <a href="#" class="text-info small">Help? Contact Support</a>
       </div>
     </div>
-    <!-- END Form Control-->
+
     <button class="btn bold btn-cons m-t-10" type="submit">Sign in</button>
-    <!-- <input type="submit" value="Login" class="btn bold btn-cons m-t-10 cta"> -->
+
 
 </form>
 <br>
@@ -47,4 +47,12 @@
 <div *ngIf="submitted" class="results">
     <strong>Password</strong>
     <span>{{messageForm.controls.password.value}}</span>
-  </div>
+  </div> -->
+
+  <!-- <button (click)="socialSignIn('facebook')" class="btn btn-social btn-facebook">
+    <span class="fa fa-facebook"></span> Sign in with Facebook</button>
+    <button (click)="socialSignIn('google')" class="btn btn-social btn-google">
+    <span class="fa fa-google"></span> Sign in with Google</button> -->
+
+
+    <button (click)="signinWithGoogle()">Sign in with Google</button>

@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
+//for social login
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { getAuthServiceConfigs } from './socialloginconfig';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,22 +24,41 @@ import { HomeComponent } from './components/home/home.component';
 
 import { MatToolbarModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule, MatCheckboxModule, MatTabsModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
 
-
+import { DataService } from './data.service';
+import { UserService } from './user.service';
+import { AuthApiService } from './auth-api.service';
+import { MyAccountComponent } from './components/my-account/my-account.component';
 
 const routes: Routes = [
 
 ];
+
+
+
+// let config = new AuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider("624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com")
+//   },
+//   {
+//     id: FacebookLoginProvider.PROVIDER_ID,
+//     provider: new FacebookLoginProvider("613680445707557")
+//   }
+// ]);
+
+// export function provideConfig() {
+//   return config;
+// }
 
 @NgModule({
   declarations: [
@@ -45,9 +70,9 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    SideNavComponent,
     HeaderComponent,
     SidenavListComponent,
+    MyAccountComponent
 
   ],
   imports: [
@@ -67,7 +92,9 @@ const routes: Routes = [
     NoopAnimationsModule,
     MatCardModule,
     MatTabsModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule,
+    SocialLoginModule
   ],
   exports: [
     ChartsModule,
@@ -79,7 +106,15 @@ const routes: Routes = [
     MatListModule,
     MatMenuModule 
   ],
-  providers: [],
+  providers: [
+    DataService,
+    UserService,
+    AuthApiService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
