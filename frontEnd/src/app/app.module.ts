@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //for social login
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
@@ -35,9 +35,16 @@ import { HeaderComponent } from './components/navigation/header/header.component
 import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
 
 import { DataService } from './data.service';
-import { UserService } from './user.service';
+// import { UserServiceA } from './userA.service';
 import { AuthApiService } from './auth-api.service';
+import { UserService } from './shared/user.service';
 import { MyAccountComponent } from './components/my-account/my-account.component';
+import { UserComponent } from './components/user/user.component';
+import { SignUpComponent } from './components/user/sign-up/sign-up.component';
+import { SignInComponent } from './components/user/sign-in/sign-in.component';
+
+import { AuthGuard } from './auth/auth.guard';
+import { AuthInterceptor  } from './auth/auth.interceptor';
 
 const routes: Routes = [
 
@@ -72,7 +79,10 @@ const routes: Routes = [
     HomeComponent,
     HeaderComponent,
     SidenavListComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    UserComponent,
+    SignUpComponent,
+    SignInComponent
 
   ],
   imports: [
@@ -110,10 +120,16 @@ const routes: Routes = [
     DataService,
     UserService,
     AuthApiService,
+    AuthGuard,
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
-    }
+    },
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })

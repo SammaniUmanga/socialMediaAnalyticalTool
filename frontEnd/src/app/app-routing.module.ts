@@ -8,6 +8,11 @@ import { MyPieChartComponent } from './components/my-pie-chart/my-pie-chart.comp
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { UserComponent } from './components/user/user.component';
+import { SignUpComponent } from './components/user/sign-up/sign-up.component';
+import { SignInComponent } from './components/user/sign-in/sign-in.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -15,8 +20,23 @@ const routes: Routes = [
   {path: 'doughnut-chart', component: MyDoughnutChartComponent},
   {path: 'radar-chart', component: MyRadarChartComponent},
   {path: 'pie-chart', component: MyPieChartComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+ // {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+
+  {
+    path: 'signup', component: UserComponent,
+    children: [{ path: '', component: SignUpComponent }]
+  },
+  {
+    path: 'login', component: UserComponent,
+    children: [{ path: '', component: SignInComponent }]
+  },
+  {
+    path: 'userprofile', component: MyAccountComponent, canActivate:[AuthGuard]
+  },
+  {
+    path: '', redirectTo: '/login', pathMatch: 'full'
+  }
  
 ];
 
