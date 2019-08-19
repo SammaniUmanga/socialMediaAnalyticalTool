@@ -15,14 +15,6 @@ import { MyAccountComponent } from './components/my-account/my-account.component
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  {path: '', component:HomeComponent},
-  {path: 'bar-chart', component: MyBarChartComponent},
-  {path: 'doughnut-chart', component: MyDoughnutChartComponent},
-  {path: 'radar-chart', component: MyRadarChartComponent},
-  {path: 'pie-chart', component: MyPieChartComponent},
- // {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-
   {
     path: 'signup', component: UserComponent,
     children: [{ path: '', component: SignUpComponent }]
@@ -36,7 +28,16 @@ const routes: Routes = [
   },
   {
     path: '', redirectTo: '/login', pathMatch: 'full'
-  }
+  },
+  {path: 'home', component:HomeComponent, canActivate:[AuthGuard]},
+  {path: 'bar-chart', component: MyBarChartComponent},
+  {path: 'doughnut-chart', component: MyDoughnutChartComponent},
+  {path: 'radar-chart', component: MyRadarChartComponent},
+  {path: 'pie-chart', component: MyPieChartComponent}
+ // {path: 'login', component: LoginComponent},
+  //{path: 'register', component: RegisterComponent},
+
+
  
 ];
 

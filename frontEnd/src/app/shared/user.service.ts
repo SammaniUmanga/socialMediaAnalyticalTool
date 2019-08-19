@@ -68,4 +68,39 @@ export class UserService {
   getUserProfile() {
     return this.http.get(this.CMS_API + '/api/userProfile');
   }
+
+
+  // sendToRestApiMethod(token: string) : void {
+  //   this.http.post(this.CMS_API + '/api/authenticate', { token: token } )
+  //       .subscribe(onSuccess => {
+  //                      //login was successful
+  //                      //save the token that you got from your REST API in your preferred location i.e. as a Cookie or LocalStorage as you do with normal login
+  //                      this.setToken('token');
+  //                     }, onFail => {
+  //                      //login was unsuccessful
+  //                      //show an error message
+  //              }
+  //       );
+  // }
+
+
+//   sendToRestApiMethodGoogle(token: string) : void {
+//     this.http.post(this.CMS_API + '/api/authenticate',
+//        {
+//           token: token
+//        }
+//     ).subscribe(
+//        onSuccess => {
+//           //login was successful
+//           //save the token that you got from your REST API in your preferred location i.e. as a Cookie or LocalStorage as you do with normal login
+//           this.setToken('token');
+//         }, onFail => {
+//           //login was unsuccessful
+//           //show an error message
+//        }
+//     );
+//  }
+
+
+
 }
