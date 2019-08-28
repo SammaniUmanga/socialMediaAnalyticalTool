@@ -1,0 +1,103 @@
+<h1>Registration Form</h1><br>
+<h3>We innovate, to grow and diversify your business.</h3>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <h5 *ngIf="success">Your Form Is Valid</h5>
+
+  <label>
+    First Name:
+    <input type="text" formControlName="fname" placeholder="First Name" [(ngModel)]="firstName">
+    <div *ngIf="submitted && registerForm.controls.fname.errors" class="errors">
+      <div *ngIf="registerForm.controls.fname.errors.required" class="err">Your name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Last Names:
+    <input type="text" formControlName="lname" placeholder="Last Name" [(ngModel)]="lastName">
+    <div *ngIf="submitted && registerForm.controls.lname.errors" class="errors">
+      <div *ngIf="registerForm.controls.lname.errors.required" class="err">Last Name is required</div>
+    </div>
+  </label>
+
+  <label>
+    User name:
+    <input type="text" formControlName="uname" placeholder="User Name" [(ngModel)]="userName">
+    <div *ngIf="submitted && registerForm.controls.uname.errors" class="errors">
+      <div *ngIf="registerForm.controls.uname.errors.required" class="err">User Name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Email:
+    <input type="text" formControlName="email" placeholder="Email" [(ngModel)]="email">
+    <div *ngIf="submitted && registerForm.controls.email.errors" class="errors">
+      <div *ngIf="registerForm.controls.email.errors.required" class="err">Enter Your Email Address Correctly</div>
+    </div>
+  </label>
+
+  <label>
+    Password:
+    <input type="text" formControlName="pword" placeholder="Minimum of 4 Charactors" [(ngModel)]="password">
+    <div *ngIf="submitted && registerForm.controls.pword.errors" class="errors">
+      <div *ngIf="registerForm.controls.pword.errors.required" class="err">Enter Your Password Correctly</div>
+    </div>
+  </label>
+
+  <div class="row m-t-10">
+      <!-- <div class="col-lg-6">
+        <p><small>I agree to the <a href="#" class="text-info">Pages Terms</a> and <a href="#" class="text-info">Privacy</a>.</small></p>
+      </div> -->
+      <!-- <div class="col-lg-6 text-right">
+        <a href="#" class="text-info small">Help? Contact Support</a>
+      </div> -->
+    </div>
+    <button class="btn btn-primary btn-cons m-t-10" type="submit" (click)="createUser()">Create a new account</button> 
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-success bold btn-cons m-t-10" type="submit">I have an account</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+       <!-- <div *ngIf="!user" class="card text-center"> -->
+    <button class="btn btn-primary bold btn-cons m-t-10" type="submit" (click)="signInWithFB()">Continue with Facebook</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-danger bold btn-cons m-t-10" type="submit" (click)="signInWithGoogle()">Continue with Google</button>
+   <!-- </div> -->
+    </form>
+   <!-- <input type="submit" value="I have an account" class="btn bold btn-cons m-t-10 cta">  -->
+
+
+
+   <!-- <div *ngIf="user" class="card text-center">
+    <h6 class="card-header">
+      Social Login Demo
+    </h6>
+    <div class="card-block"></div>
+    <img class="card-img-top img-responsive photo" src="{{ user.photoUrl }}">
+    <div class="card-block">
+      <h4 class="card-title">{{ user.name }}</h4>
+      <p class="card-text">{{ user.email }}</p>
+    </div>
+    <div class="card-block">
+      <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+    </div>
+  </div> -->
+
+
+<!-- <div style="text-align:center; margin-bottom: 100px;">
+
+  <div>
+
+    <h1>Create user</h1>
+    <div><input type="text" placeholder="First Name" [(ngModel)]="firstName"></div>
+    <div><input type="text" placeholder="Last Name" [(ngModel)]="lastName"></div>
+    <div><input type="text" placeholder="User Name" [(ngModel)]="userName"></div>
+    <div><input type="text" placeholder="Email" [(ngModel)]="email"></div>
+    <div><input type="text" placeholder="Password" [(ngModel)]="password"></div>
+    <div><input type="button" value="create user" (click)="createUser()"></div>
+
+
+
+    </div>
+</div> -->
+
+
