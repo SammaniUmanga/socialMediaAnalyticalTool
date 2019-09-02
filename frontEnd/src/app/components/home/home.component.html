@@ -141,7 +141,7 @@
               <div class="inner">
                 <!-- START BREADCRUMB -->
                 <!-- <ol class="breadcrumb sm-p-b-5"></ol> -->
-        
+        <br>
                 <div class="md-form active-cyan active-cyan-2 mb-3">
                     <div class="row">
                         <div class="col-sm-3">
@@ -150,7 +150,9 @@
                         <input class="form-control" type="search" id="search3" placeholder="Search.." [(ngModel)]="search">
                       </div>
                       <div class="col-sm-3 ">
-                          <button class="search-botton" (click)="searchKey()" value="search key"><i class="fa fa-search" aria-hidden="true"></i></button>
+                          <button class="search-botton" (click)="searchKey()" value="search key"><i class="material-icons">
+                            search
+                            </i></button>
                       </div>
                     </div>
                   </div>
@@ -183,9 +185,8 @@
                           Still, computers can do a pretty good job at what we are after: getting concepts and sentiment from text.
                           The term linguistic analysis covers a lot of territory.
                           We will use it in the narrow sense of a computer’s attempt to extract meaning from text.
-                          Linguistic analysis is the theory behind what the computer is doing.
-                          We say that the computer is performing Natural Language Processing (NLP) when it is doing an analysis based on the theory.
-                          Linguistic analysis is the basis for Text Analytics.</p>
+                          Linguistic.
+                    </p>
                         <a href="#" class="btn btn-block m-t-30">See all reports</a>
                     </div>
                   </div>
@@ -269,7 +270,13 @@
 
 <!-- <div class="row">
     <div> -->
-    <video-list [videos]="videos"></video-list>
+
+      
+      <!-- SHOW VIDEOS -->
+    <!-- <video-list [videos]="videos"></video-list> -->
+
+
+
    <!-- </div> -->
   <!-- <div class="col-sm-9">
     <video-detail></video-detail>

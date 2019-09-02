@@ -33,9 +33,9 @@ export class HomeComponent implements OnInit {
       search: this.search
     }
     console.log(postKey);
-  //  this.searchService.searchKey(postKey).subscribe(res => {
-  //   console.log(res);
-  //  });
+   this.searchService.searchKey(postKey).subscribe(res => {
+    console.log(res);
+   });
   }
 
   ngOnInit() {

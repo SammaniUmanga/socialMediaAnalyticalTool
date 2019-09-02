@@ -18,6 +18,6 @@ export class SearchService {
    }
 
    searchKey(data: any): Observable<any> {
-     return this.http.post(this.CMS_API + '/api/search', data, httpOptions);
+     return this.http.post(this.CMS_API + '/api/search', data);
    }
 }

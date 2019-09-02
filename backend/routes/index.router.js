@@ -15,6 +15,7 @@ router.get('/userProfile', jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 router.get('/getVideos', ctrlVideo.getVideos );
 
 router.post('/search', ctrlSearch.searchKey); 
+router.post('/postdata', ctrlSearch.getSearchVideo);
 
 
 module.exports = router;
