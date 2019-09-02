@@ -13,6 +13,7 @@ import { SignUpComponent } from './components/user/sign-up/sign-up.component';
 import { SignInComponent } from './components/user/sign-in/sign-in.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { TrendingVideoComponent } from './components/trending-video/trending-video.component';
+import { WordCloudComponent } from './components/word-cloud/word-cloud.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
     path: '', redirectTo: '/login', pathMatch: 'full'
   },
   {path: 'home', component:HomeComponent },
+  {path: 'cloud', component:WordCloudComponent },
   {path: 'trendig', component:TrendingVideoComponent, canActivate:[AuthGuard] },
   {path: 'bar-chart', component: MyBarChartComponent},
   {path: 'doughnut-chart', component: MyDoughnutChartComponent},

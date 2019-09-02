@@ -27,6 +27,7 @@ import { SignInComponent } from './components/user/sign-in/sign-in.component';
 import { VideoListComponent } from './components/video-list/video-list.component';
 import { VideoDetailComponent } from './components/video-detail/video-detail.component';
 import { TrendingVideoComponent } from './components/trending-video/trending-video.component';
+import { WordCloudComponent } from './components/word-cloud/word-cloud.component';
 
 import { MatToolbarModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
@@ -51,7 +52,7 @@ import { AuthInterceptor  } from './auth/auth.interceptor';
 
 import { SafePipe } from './safe.pipe';
 import { FilterPipe } from './filter.pipe';
-
+import { TagCloudModule } from 'angular-tag-cloud-module';
 
 
 const routes: Routes = [
@@ -95,7 +96,8 @@ const routes: Routes = [
     VideoDetailComponent,
     SafePipe,
     FilterPipe,
-    TrendingVideoComponent
+    TrendingVideoComponent,
+    WordCloudComponent
 
   ],
   imports: [
@@ -118,7 +120,8 @@ const routes: Routes = [
     MatMenuModule,
     HttpClientModule,
     SocialLoginModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    TagCloudModule
   ],
   exports: [
     ChartsModule,

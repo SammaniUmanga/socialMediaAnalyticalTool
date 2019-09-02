@@ -170,15 +170,15 @@
 
             <!-- START ROW -->
             <div class="row">
-                <div class="col-lg-5 md-m-b-10">
+                <div class="col-lg-6 md-m-b-4">
                   <!-- START WIDGET widget_pendingComments.tpl-->
                   <div class=" card no-border no-margin widget-loader-circle todolist-widget pending-projects-widget">
                     <div class="card-header">
                       <div class="card-title">
-                        <h4 class="bold">Report</h4>
+                        <h4 class="bold">Word Cloud</h4>
                       </div>
                     </div>
-                    <div class="card-block">
+                    <!-- <div class="card-block">
                         <p>Figuring out what humans are saying in written language is a difficult task.
                           There is a huge amount of literature, and a great many software attempts to achieve this goal.
                           The bottom line is that we are still a long way off from having computers really understand human language.
@@ -188,55 +188,28 @@
                           Linguistic.
                     </p>
                         <a href="#" class="btn btn-block m-t-30">See all reports</a>
-                    </div>
+                    </div> -->
+                    <app-word-cloud></app-word-cloud>
                   </div>
                 </div>
-                <!-- END WIDGET -->
-
-                <div class="col-lg-7 sm-m-t-10">
-                  <!-- START WIDGET widget_mapWidget-->
-                  <div class="widget-13 card no-border  no-margin widget-loader-circle">
-
-                    <div class="container-sm-height no-overflow">
-                      <div class="row row-sm-height">
-                        <div class="col-sm-7 col-lg-8 col-xlg-9 col-sm-height col-top no-padding">
-
-                          <div class="card-block">
-                            <div class="tab-content">
-                              <div class="tab-pane active" id="tab1">
-                                <h3>YouTube</h3>
-                                <!-- <p class="hint-text all-caps font-montserrat small no-margin ">Views</p>
-                                <p class="all-caps font-montserrat  no-margin text-success ">14,256</p>
-                                <br>
-                                <p class="hint-text all-caps font-montserrat small no-margin ">Today</p>
-                                <p class="all-caps font-montserrat  no-margin text-warning ">24</p>
-                                <br>
-                                <p class="hint-text all-caps font-montserrat small no-margin ">Week</p>
-                                <p class="all-caps font-montserrat  no-margin text-success ">56</p> -->
-
-                                <div style="display: block">
-                                  <canvas baseChart
-                                              [data]="doughnutChartData"
-                                              [labels]="doughnutChartLabels"
-                                              [chartType]="doughnutChartType"></canvas>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                          
-                        </div>
-                        <div class="col-sm-5 col-lg-4 col-xlg-3 col-sm-height col-top no-padding relative">
-                          <div class="bg-success widget-13-map">
-
-                          </div>
+                <div class="col-lg-6 md-m-b-8">
+                    <!-- START WIDGET widget_pendingComments.tpl-->
+                    <div class=" card no-border no-margin widget-loader-circle todolist-widget pending-projects-widget">
+                      <div class="card-header">
+                        <div class="card-title">
+                          <h4 class="bold">YouTube</h4>
                         </div>
                       </div>
+  
+                      <div style="display: block">
+                        <br>
+                        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"></canvas>
+                      </div>
                     </div>
-
                   </div>
-                  <!-- END WIDGET -->
-                </div>
+                <!-- END WIDGET -->
+              
+               
 
               </div>
               <!-- END ROW -->
