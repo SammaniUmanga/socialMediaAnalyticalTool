@@ -95,13 +95,13 @@
         <a href="#" class="btn-link toggle-sidebar hidden-lg-up pg pg-menu" data-toggle="sidebar">
         </a>
         <!-- END MOBILE SIDEBAR TOGGLE -->
-        <div class="">
-          <!-- <div class="brand inline">
+        <!-- <div class="">
+          <div class="brand inline">
             <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-          </div> -->
+          </div>
           <a href="#" class="btn btn-link text-primary m-l-20 hidden-md-down">Add New Item</a>
           <input id="search" class="search-link no-border bold bg-transparent fs-16" placeholder="Search..." autocomplete="on" spellcheck="false"><i class="bold pg-search"></i>
-        </div>
+        </div> -->
 
         <div class="d-flex align-items-center">
           <!-- START NOTIFICATION LIST -->
@@ -140,11 +140,26 @@
             <div class="container-fluid p-l-25 p-r-25 sm-p-l-0 sm-p-r-0">
               <div class="inner">
                 <!-- START BREADCRUMB -->
-                <ol class="breadcrumb sm-p-b-5">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
+                <!-- <ol class="breadcrumb sm-p-b-5"></ol> -->
+        
+                <div class="md-form active-cyan active-cyan-2 mb-3">
+                    <div class="row">
+                        <div class="col-sm-3">
+                        </div>
+                      <div class="col-sm-6">
+                        <input class="form-control" type="search" id="search3" placeholder="Search.." [(ngModel)]="search">
+                      </div>
+                      <div class="col-sm-3 ">
+                          <button class="search-botton" (click)="searchKey()" value="search key"><i class="fa fa-search" aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                  </div>
+          <!-- Search form -->
+               
+             
               </div>
+     
+
             </div>
           </div>
           <!-- END JUMBOTRON -->

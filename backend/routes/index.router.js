@@ -3,6 +3,7 @@ const router = express.Router();
 
 const ctrlUser = require('../controllers/user.controller');
 const ctrlVideo = require('../controllers/video.controller');
+const ctrlSearch = require('../controllers/search.controller');
 const jwtHelper = require('../config/jwtHelper');
 
 
@@ -12,5 +13,8 @@ router.get('/getUsers', ctrlUser.getUsers);
 
 router.get('/userProfile', jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 router.get('/getVideos', ctrlVideo.getVideos );
+
+router.post('/search', ctrlSearch.searchKey); 
+
 
 module.exports = router;

@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: '', redirectTo: '/login', pathMatch: 'full'
   },
-  {path: 'home', component:HomeComponent, canActivate:[AuthGuard]},
+  {path: 'home', component:HomeComponent },
   {path: 'bar-chart', component: MyBarChartComponent},
   {path: 'doughnut-chart', component: MyDoughnutChartComponent},
   {path: 'radar-chart', component: MyRadarChartComponent},

@@ -20,7 +20,12 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { UserComponent } from './components/user/user.component';
+import { SignUpComponent } from './components/user/sign-up/sign-up.component';
+import { SignInComponent } from './components/user/sign-in/sign-in.component';
+import { VideoListComponent } from './components/video-list/video-list.component';
+import { VideoDetailComponent } from './components/video-detail/video-detail.component';
 
 import { MatToolbarModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
@@ -29,10 +34,10 @@ import { MatButtonModule, MatCheckboxModule, MatTabsModule } from '@angular/mate
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { DataService } from './data.service';
 // import { UserServiceA } from './userA.service';
@@ -40,16 +45,12 @@ import { AuthApiService } from './auth-api.service';
 import { UserService } from './shared/user.service';
 import { VideosService } from './shared/videos.service';
 
-import { MyAccountComponent } from './components/my-account/my-account.component';
-import { UserComponent } from './components/user/user.component';
-import { SignUpComponent } from './components/user/sign-up/sign-up.component';
-import { SignInComponent } from './components/user/sign-in/sign-in.component';
-
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor  } from './auth/auth.interceptor';
-import { VideoListComponent } from './components/video-list/video-list.component';
-import { VideoDetailComponent } from './components/video-detail/video-detail.component';
+
 import { SafePipe } from './safe.pipe';
+import { FilterPipe } from './filter.pipe';
+
 
 const routes: Routes = [
 
@@ -90,7 +91,8 @@ const routes: Routes = [
     SignInComponent,
     VideoListComponent,
     VideoDetailComponent,
-    SafePipe
+    SafePipe,
+    FilterPipe
 
   ],
   imports: [
@@ -112,7 +114,8 @@ const routes: Routes = [
     MatTabsModule,
     MatMenuModule,
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    AngularFontAwesomeModule
   ],
   exports: [
     ChartsModule,
