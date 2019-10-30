@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { stringify } from 'querystring';
 import { SearchService } from '../../shared/search.service';
 import { HttpClient } from '@angular/common/http';
+import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
+
 
 @Component({
   selector: 'app-home',
@@ -13,11 +15,35 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  //--------------------------------------------WORD CLOUD----------------------------------------------------
+  options: CloudOptions = {
+    // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value
+    width: 500,
+    height: 378,
+    overflow: false,
+  };
+
+
+  clouddata = [
+    {text: 'නවසීලන්ත', weight: 9, color: '#2E86C1'},
+    {text: 'ක්‍රිකට්', weight: 25},
+    {text: 'ක්රිකට් ', weight: 14, color: '#21618C'},
+    {text: 'කුසල් මෙන්ඩිස්', weight: 12, color: '#2874A6'},
+    {text: 'දිනේෂ් චන්දිමාල්', weight: 11, color: '#2E86C1'}
+  ];
+
+
+
+  //--------------------------------------------WORD CLOUD----------------------------------------------------
+  
   urlabc= "http://www.youtube.com/embed/";
   search: string;
-  public doughnutChartLabels = ['Negative', 'Positive'];
-  public doughnutChartData = [180, 90];
+
+  public doughnutChartLabels = ['Negative','Positive'];
+  public doughnutChartData = [50,50];
   public doughnutChartType = 'doughnut';
+
   videos: any;
   videosid: any;
   results: any;
@@ -26,8 +52,14 @@ export class HomeComponent implements OnInit {
   views:any;
   likes:any;
   dislikes:any;
+  sentiscore:any;
+  cloudword:any;
+  cloudwordscore:any;
+  positive:any;
+  negative:any;
   arr: any;
   ID: any;
+
   //video;
   //videos: Video[];
   // videos: Video[] = [
@@ -49,26 +81,12 @@ export class HomeComponent implements OnInit {
   //  });
   // }
 
-
   searchKey() {
-    
     
     let postKey = this.search
     console.log(postKey);
     this.httpClient.post('http://127.0.0.1:5002/postdata', {postKey}).subscribe(data => {
       
-
-     // let id = data;
-
-      let id = data.valueOf().ID;
-     // console.log(id);
-      // let ID: any;
-      // let Title: any;
-      // let Comment: any;
-      // let Views:any;
-      // let Likes: any;
-      // let Dislikes: any;
-      // let viralwords: any;
 
       this.videosid = data.valueOf().ID;
       this.likes = data.valueOf().Likes;
@@ -76,18 +94,19 @@ export class HomeComponent implements OnInit {
       this.views = data.valueOf().Views;
       this.comments = data.valueOf().Comment;
       this.title = data.valueOf().Title;
+      this.sentiscore = data.valueOf().Sentiment;
+      this.cloudword = data.valueOf().Cloudword;
+      this.cloudwordscore = data.valueOf().Cloudwordscore;
+      this.positive = data.valueOf().Positive;
+      this.negative = data.valueOf().Negative;
 
-      let newarr:any[][] =[];
-      let newarr1:any[][] =[];
 
+    this.doughnutChartLabels = ['Negative', 'Positive'];
+    this.doughnutChartData = [this.negative,this.positive];
+    //this.doughnutChartType = 'doughnut';
 
- 
-        // for(var i=0;i<this.videos.length;i++) {
-
-          // newarr.push(this.videos[i],this.likes[i]);
 let arr = [];
 let len = this.videosid.length;
-//for (let s = 0; s< 1; s++) {
 
   for(var i=0;i<len;i++) {
   arr.push({
@@ -97,51 +116,27 @@ let len = this.videosid.length;
     views: this.views[i],
     title: this.title[i],
     comments: this.comments[i],
+    
   }); 
-// this.videos.push(arr);
+
 }
+
+let wdrr = [];
+  for(var j=0;j<this.cloudword.length;j++){
+    wdrr.push({'text': this.cloudword[j],'weight': this.cloudwordscore[j]});
+  }
+  this.clouddata = wdrr;
+
+console.log('dddd',this.clouddata);
+
 this.videos = [arr];
 
+console.log(this.cloudword);
 console.log('&&&&&', this.videos);
-       //  }
-        // newarr1.push(newarr);
- 
-// var arr = [];
-// var len = newarr.length;
-// for (let s = 0; s< len; s++) {
-//   arr.push({
-//     id: newarr[i],
-//     likes: newarr[i]
-//   })
-// }
 
-
-      //console.log(newarr);
-     // newarr = this.videos[1].concat(this.likes[0]);
+console.log(data);
+});
       
-      
-      // this.dislikes = data.Dislikes;
-      // jh.forEach(elements => {
-      //   this.videos = elements;
-      //   console.log(elements);
-      // });
-      
-      // console.log(data.ID);
-      // console.log(data.Title);
-      // console.log(data.Comment);
-      // console.log(data.Views);
-      // console.log(data.Likes);
-      // console.log(data.Dislikes);
-      // console.log(data.viralwords); 
-
-      console.log(data);
-    }
-    
-
-  );
-     //console.log(data.DisLik));
-      // this.videosService.getVideos().subscribe(resVideosData => this.videos = resVideosData );
-     
 }
 
   ngOnInit() {
@@ -149,7 +144,6 @@ console.log('&&&&&', this.videos);
   //  var videos =  this.searchKey();
   //   console.log('sam is working', videos);
   }
-
 
 }
 
