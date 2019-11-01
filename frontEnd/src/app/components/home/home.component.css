@@ -72,3 +72,42 @@
 .search-botton {
   background-color: rgb(114, 173, 197);
 }
+
+.likebutton {
+  background-color: rgb(25, 177, 30);
+  border: none;
+  color: white;
+  padding: 9px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.dislikebutton {
+  background-color: #f31a0b;
+  border: none;
+  color: white;
+  padding: 9px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.viewsbutton {
+  background-color: rgb(32, 112, 204);
+  border: none;
+  color: white;
+  padding: 9px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

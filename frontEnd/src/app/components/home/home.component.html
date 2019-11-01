@@ -56,12 +56,15 @@
         <br>
                 <div class="md-form active-cyan active-cyan-2 mb-3">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-2 col-md-2">
                         </div>
-                      <div class="col-sm-6">
-                        <input class="form-control" type="search" id="search3" placeholder="Search.." [(ngModel)]="search">
+                        <div class="col-sm-4 col-md-1"></div>
+                        
+                      <div class="col-sm-4 col-md-6">
+                          
+                        <input class="form-control" type="search" id="search3" placeholder="Enter your keyword here ..." [(ngModel)]="search">
                       </div>
-                      <div class="col-sm-3 ">
+                      <div class="col-sm-2 col-md-3">
                           <button class="search-botton" (click)="searchKey()" value="search key"><i class="material-icons">
                             search
                             </i></button>
@@ -84,7 +87,7 @@
             <div class="row">
                 <div class="col-lg-6 md-m-b-4">
                   <!-- START WIDGET widget_pendingComments.tpl-->
-                  <div class=" card no-border no-margin widget-loader-circle todolist-widget pending-projects-widget">
+                  <div class=" card">
                     <div class="card-header">
                       <div class="card-title">
                         <h4 class="bold">Word Cloud</h4>
@@ -114,7 +117,7 @@
   
                       <div style="display: block">
                         <br>
-                        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"></canvas>
+                        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
                         <h3>Sentiment Score : {{sentiscore}} (%)</h3>
                         
                       </div>
@@ -160,9 +163,9 @@
           </p>
         </mat-card-content>
         <mat-card-actions >
-          <button mat-button>Likes : {{ane.likes}}</button>
-          <button mat-button>Dislikes : {{ane.dislikes}}</button>
-          <button mat-button>Views : {{ane.views}}</button>
+          <button mat-button class="likebutton">Likes : {{ane.likes}}</button>
+          <button mat-button class="dislikebutton">Dislikes : {{ane.dislikes}}</button>
+          <button mat-button class="viewsbutton">Reach : {{ane.views}}</button>
         </mat-card-actions>
       </mat-card>
       </div>
