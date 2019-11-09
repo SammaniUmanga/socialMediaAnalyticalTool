@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   views:any;
   likes:any;
   dislikes:any;
-  sentiscore:any;
+  sentiscore:any = 0;
   cloudword:any;
   cloudwordscore:any;
   positive:any;

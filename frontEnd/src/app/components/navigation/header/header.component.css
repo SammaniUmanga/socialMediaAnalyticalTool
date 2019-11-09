@@ -16,7 +16,7 @@ a:hover, a:active{
  
 .mat-toolbar{
     border-radius: 3px;
-    background-color: navy;
+    background-color: rgb(1, 1, 77);
 }
 
 @media(max-width: 959px){
