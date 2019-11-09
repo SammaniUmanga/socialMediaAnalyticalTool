@@ -3,7 +3,7 @@ import { User } from './user.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment as ENV } from '../../environments/environment';
 import { Observable } from 'rxjs';
-
+import { Router }  from '@angular/router';
 const httpOptions = {
   headers: new HttpHeaders().set('Content-Type', 'application/json')
 };
@@ -23,7 +23,7 @@ export class UserService {
   };
   CMS_API: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.CMS_API = ENV.CMS_API;
    }
 
@@ -73,36 +73,8 @@ export class UserService {
     return this.http.get(this.CMS_API + '/api/getUsers');
   }
 
-  // sendToRestApiMethod(token: string) : void {
-  //   this.http.post(this.CMS_API + '/api/authenticate', { token: token } )
-  //       .subscribe(onSuccess => {
-  //                      //login was successful
-  //                      //save the token that you got from your REST API in your preferred location i.e. as a Cookie or LocalStorage as you do with normal login
-  //                      this.setToken('token');
-  //                     }, onFail => {
-  //                      //login was unsuccessful
-  //                      //show an error message
-  //              }
-  //       );
-  // }
+  
 
-
-//   sendToRestApiMethodGoogle(token: string) : void {
-//     this.http.post(this.CMS_API + '/api/authenticate',
-//        {
-//           token: token
-//        }
-//     ).subscribe(
-//        onSuccess => {
-//           //login was successful
-//           //save the token that you got from your REST API in your preferred location i.e. as a Cookie or LocalStorage as you do with normal login
-//           this.setToken('token');
-//         }, onFail => {
-//           //login was unsuccessful
-//           //show an error message
-//        }
-//     );
-//  }
 
 
 

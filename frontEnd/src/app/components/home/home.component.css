@@ -111,3 +111,20 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+
+angular-tag-cloud.custom-css {
+  border: 8px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+tr:hover {background-color:#bd1313;}

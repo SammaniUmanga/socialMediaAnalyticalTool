@@ -5,9 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //for social login
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
-import { getAuthServiceConfigs } from './socialloginconfig';
+// Importing social login module and facebook login provider.
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from "angularx-social-login";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,22 +58,17 @@ const routes: Routes = [
 
 ];
 
+const config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('420025968701769')
+  }
+]);
 
+export function provideConfig(){
+  return config;
+}
 
-// let config = new AuthServiceConfig([
-//   {
-//     id: GoogleLoginProvider.PROVIDER_ID,
-//     provider: new GoogleLoginProvider("624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com")
-//   },
-//   {
-//     id: FacebookLoginProvider.PROVIDER_ID,
-//     provider: new FacebookLoginProvider("613680445707557")
-//   }
-// ]);
-
-// export function provideConfig() {
-//   return config;
-// }
 
 @NgModule({
   declarations: [
@@ -141,7 +135,7 @@ const routes: Routes = [
     AuthGuard,
     {
       provide: AuthServiceConfig,
-      useFactory: getAuthServiceConfigs
+      useFactory: provideConfig
     },
     {
     provide: HTTP_INTERCEPTORS,

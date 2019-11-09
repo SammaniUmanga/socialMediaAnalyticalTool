@@ -44,6 +44,8 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
+      <br>
+     
       <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
         <div class="content sm-gutter">
@@ -53,20 +55,17 @@
               <div class="inner">
                 <!-- START BREADCRUMB -->
                 <!-- <ol class="breadcrumb sm-p-b-5"></ol> -->
-        <br>
+        
                 <div class="md-form active-cyan active-cyan-2 mb-3">
                     <div class="row">
                         <div class="col-sm-2 col-md-2">
-                        </div>
-                        <div class="col-sm-4 col-md-1"></div>
-                        
-                      <div class="col-sm-4 col-md-6">
-                          
-                        <input class="form-control" type="search" id="search3" placeholder="Enter your keyword here ..." [(ngModel)]="search">
+                        </div> 
+                      <div class="form-group col-sm-6 col-md-6">
+                        <input class="form-control" (keydown.enter)="searchKey()" type="text" id="search3" placeholder="Enter your keyword here ..." [(ngModel)]="search">
                       </div>
-                      <div class="col-sm-2 col-md-3">
-                          <button class="search-botton" (click)="searchKey()" value="search key"><i class="material-icons">
-                            search
+                      <div class="col-sm-4 col-md-3">
+                          <button mat-button class="btn" (click)="searchKey()" value="search key">
+                            <i class="fa fa-search fa-lg" aria-hidden="true"> Search
                             </i></button>
                       </div>
                     </div>
@@ -81,52 +80,82 @@
           </div>
           <!-- END JUMBOTRON -->
           <!-- START CONTAINER FLUID -->
+         
           <div class="container-fluid p-l-25 p-r-25 p-t-0 p-b-25 sm-padding-10">
 
             <!-- START ROW -->
             <div class="row">
-                <div class="col-lg-6 md-m-b-4">
+                <div class="col-5">
                   <!-- START WIDGET widget_pendingComments.tpl-->
-                  <div class=" card">
+                  <div class="card">
                     <div class="card-header">
-                      <div class="card-title">
-                        <h4 class="bold">Word Cloud</h4>
-                      </div>
+                        <h4>Topic Cloud</h4>
                     </div>
-            
                     <div>
                       <angular-tag-cloud
                         [data]="clouddata"
                         [width]="options.width"
                         [height]="options.height"
-                        [overflow]="options.overflow">
+                        [background]="options.background"
+                        [overflow]="options.overflow"
+                        [zoomOnHover]="zoomOnHoverOptions"
+                        (clicked)="logClicked($event)"
+                        >
                       </angular-tag-cloud>
                     </div>
-                    
-                    <!-- <app-word-cloud></app-word-cloud> -->
                   </div>
                 </div>
-                <div class="col-lg-6 md-m-b-8">
+                <div class="col-5">
                     <!-- START WIDGET widget_pendingComments.tpl-->
-                    <div class=" card no-border no-margin widget-loader-circle todolist-widget pending-projects-widget">
+                    <div class=" card">
                       <div class="card-header">
-                        <div class="card-title">
-                          <h4 class="bold">YouTube</h4>
-                        </div>
+                          <h4>Sentiment</h4>
                       </div>
-  
-                      <div style="display: block">
-                        <br>
-                        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
-                        <h3>Sentiment Score : {{sentiscore}} (%)</h3>
+                      <div>
                         
+                        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors" [plugins]="doughnutChartPlugins" [legend]="doughnutChartLegend"></canvas>
+                        
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div><h4>Sentiment Score : {{sentiscore}}</h4></div>
+                        </div>
+                            
                       </div>
                     </div>
                   </div>
-                <!-- END WIDGET -->
-              
-               
 
+                  <div class="col-2">
+                      <div class=" card">
+                          <div class="card-header">
+                              <h5>Trending Words</h5>
+                          </div>
+                          <div>
+                              
+                                  <table>
+                                      <tr>
+                                        <td>John</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Mary</td>
+                                      </tr>
+                                      <tr>
+                                        <td>July</td>
+                                      </tr>
+                                      <tr>
+                                        <td>July</td>
+                                      </tr>
+                                      <tr>
+                                        <td>July</td>
+                                      </tr>
+                                      <tr>
+                                        <td>July</td>
+                                      </tr>
+                                  </table>
+                                
+                          </div>
+                      </div>
+                  </div>
+                <!-- END WIDGET -->
               </div>
               <!-- END ROW -->
               <br/><br/> 
@@ -150,22 +179,36 @@
     <li *ngFor="let video of videos">
   <div class="menu videosize" *ngFor="let ane of video">
       <div class="">
-      <mat-card class="" >
-        <mat-card-header>
+      <mat-card>
+        <mat-card class="card-header">
           <!-- <div mat-card-avatar class="example-header-image"></div> -->
-          <mat-card-title><b>{{ane.title}}</b></mat-card-title>
+          <b>{{ane.title}}</b>
           <!-- <mat-card-subtitle>{{video.Title.split(' ')[1]}}</mat-card-subtitle> -->
-        </mat-card-header>
+      </mat-card>
+      <div class="row">
+       <div class="col-6">
         <iframe width="500" height="180" [src]="urlabc + ane.id | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <mat-card-content >
+      </div>
+      <div class="col-4">
+          <div style="display: block">
+            <canvas baseChart [datasets]="ane.barcharts" [labels]="barChartLabels" [options]="barChartOptions" 
+              [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+      <div class="col-2"><br><br><br><br>
+          <p>Reach : {{ane.views}}</p>
+      </div>
+      </div>  
+      <div class="card-header" >
           <p>
             {{ane.comments}}
           </p>
-        </mat-card-content>
+      </div>
         <mat-card-actions >
-          <button mat-button class="likebutton">Likes : {{ane.likes}}</button>
-          <button mat-button class="dislikebutton">Dislikes : {{ane.dislikes}}</button>
-          <button mat-button class="viewsbutton">Reach : {{ane.views}}</button>
+          <!-- <button mat-button class="likebutton">Likes : {{ane.likes}}</button>
+          <button mat-button class="dislikebutton">Dislikes : {{ane.dislikes}}</button> -->
+          
         </mat-card-actions>
       </mat-card>
       </div>
@@ -173,6 +216,7 @@
     </li>
   </ul>
   
+
 
 <!-- ######################################## -->
    <!-- </div> -->

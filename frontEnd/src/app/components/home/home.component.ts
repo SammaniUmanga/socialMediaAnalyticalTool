@@ -6,10 +6,13 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { stringify } from 'querystring';
 import { SearchService } from '../../shared/search.service';
 import { HttpClient } from '@angular/common/http';
-import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
-import { Label, Color } from 'ng2-charts';
-import { ChartsModule } from 'ng2-charts';
-
+import { CloudData, CloudOptions, ZoomOnHoverOptions } from 'angular-tag-cloud-module';
+import { Label, Color,ChartsModule, SingleDataSet } from 'ng2-charts';
+import { AuthService } from 'angularx-social-login';
+import { Router } from "@angular/router";
+import { UserService } from '../../shared/user.service';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-home',
@@ -18,22 +21,48 @@ import { ChartsModule } from 'ng2-charts';
 })
 export class HomeComponent implements OnInit {
 
-  //--------------------------------------------WORD CLOUD----------------------------------------------------
+
+  barcharts:any;
+  videos: any;
+  videosid: any;
+  results: any;
+  comments:Object;
+  title:any;
+  views:any;
+  likes:any;
+  dislikes:any;
+  sentiscore:any;
+  cloudword:any;
+  cloudwordscore:any;
+  positive:any;
+  negative:any;
+  arr: any;
+  //ID: any;
+  userData: any;
+
+
+  //-------------------------------------------- Start WORD CLOUD ----------------------------------------------------
   options: CloudOptions = {
     // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value
-    width: 550,
-    height: 378,
+    width: 522,
+    height: 295,
     overflow: false,
+    background:'#EEEEEE',
   };
 
+  zoomOnHoverOptions: ZoomOnHoverOptions = {
+    scale: 1.3, // Elements will become 130 % of current zize on hover
+    transitionTime: 0.5, // it will take 0.5 seconds until the zoom level defined in scale property has been reached
+    delay: 0.05 // Zoom will take affect after 0.05 seconds
+  };
 
   clouddata = [
     {text: 'නවසීලන්ත', weight: 9, color: '#2E86C1'},
-    {text: 'ක්‍රිකට්', weight: 25},
+    {text: 'ක්‍රිකට්', weight: 24},
     {text: 'ක්රිකට් ', weight: 14, color: '#21618C'},
     {text: 'කුසල් මෙන්ඩිස්', weight: 12, color: '#2874A6'},
     {text: 'දිනේෂ් චන්දිමාල්', weight: 11, color: '#2E86C1'},
-    {text: 'විකට්', weight: 6, color: '#2E86C1'},
+    {text: 'විකට්', weight: 11, color: '#2E86C1'},
     {text: 'එක්දින', weight: 13, color: '#2E86C1'},
     {text: 'නවසීලන්ත', weight: 9, color: '#2E86C1'},
     {text: 'ක්‍රිකට් ', weight: 5},
@@ -59,56 +88,67 @@ export class HomeComponent implements OnInit {
     {text: 'තරගාවලිය', weight: 11, color: '#1B4F72'}
   ];
 
+  //clicked cloud word will go to the search bar
+  logClicked(clicked: CloudData){
+    this.search = clicked.text;
+  }
+
+  //-------------------------------------------- End WORD CLOUD ----------------------------------------------------
 
 
-  //--------------------------------------------WORD CLOUD----------------------------------------------------
+  //-------------------------------------------- Start Doughnut Chart ----------------------------------------------------
   
   urlabc= "http://www.youtube.com/embed/";
   search: string;
 
-  public doughnutChartLabels = ['Negative','Positive'];
+  public doughnutChartLabels = ['Positive','Negative'];
   public doughnutChartData = [50,50];
   public doughnutChartType = 'doughnut';
-  //public donutColors = { backgroundColor: ['rgba(77,83,96,1)','rgba(0,0,96,1)'] };
-  public doughnutChartColors: any[] = [ {backgroundColor: ['red','green']} ]
+  public doughnutChartColors: Color[] = [ {backgroundColor: ['#1ABF00','#E90000']} ];
+  public doughnutChartLegend = true;
+  public doughnutChartPlugins = [{
+    afterLayout: function (chart) {
+      chart.legend.legendItems.forEach(
+        (label) => {
+          let value = chart.data.datasets[0].data[label.index];
 
-  videos: any;
-  videosid: any;
-  results: any;
-  comments:Object;
-  title:any;
-  views:any;
-  likes:any;
-  dislikes:any;
-  sentiscore:any;
-  cloudword:any;
-  cloudwordscore:any;
-  positive:any;
-  negative:any;
-  arr: any;
-  ID: any;
+          label.text += ' ' + value + ' %';
+          return label;
+        }
+      )
+    }
+  }];
+  //-------------------------------------------- End Doughnut Chart ----------------------------------------------------
 
-  //video;
-  //videos: Video[];
-  // videos: Video[] = [
-  //   {"Title": "Title1", "View_Count": "1000", "Likes": "100", "DisLikes": "100","VideoID": "abc1", "Comment": "Comment1"},
-  //   {"Title": "Title2", "View_Count": "166600", "Likes": "100", "DisLikes": "100","VideoID": "abc2", "Comment": "Comment2"}
-  // ]
-  constructor(private videosService:VideosService, private searchService:SearchService,private httpClient: HttpClient) {
 
-  }
+  //-------------------------------------------- Start HorizontalBar Chart ----------------------------------------------------
 
-  // searchKey(): void {
-  //   let postKey = {
-  //     search: this.search
-  //   }
-  //   console.log('front1',postKey);
-  //  this.searchService.searchKey(postKey).subscribe(res => {
+  public barChartOptions: ChartOptions = {responsive: true, plugins: {datalabels: {anchor: 'end',align: 'end'}}};
+  public barChartType: ChartType = 'horizontalBar';
+  public barChartLegend = true;
+  public barChartPlugins = [pluginDataLabels];
+  public barChartLabels: string[] = [];
+  public barChartColors: any[] = [{backgroundColor:'#1ABF00'},{backgroundColor:'#E90000'}];
+  // public barChartColors: any[] = [{backgroundColor:'#1ABF00'},{backgroundColor:'#E90000'},{backgroundColor:'#0000CD'}];
+  
+  public barChartData: any[] = [
+   { data: [56], label: 'Likes' },
+   { data: [45], label: 'Dislikes' },
+  // { data: [28], label: 'Reach' }
+  ];
 
-  //     console.log('front2',res);
-  //  });
-  // }
+  //-------------------------------------------- End HorizontalBar Chart ----------------------------------------------------
+  
+  
+  constructor(private videosService:VideosService, private searchService:SearchService,private httpClient: HttpClient, private router : Router, 
+    private socialAuthService: AuthService, private userService: UserService) 
+    {
+      // this.userData = this.userService.getData();
+      
+    }
 
+     
+  //-------------------------------------------- Start search function ----------------------------------------------------
   searchKey() {
     
     let postKey = this.search
@@ -129,38 +169,58 @@ export class HomeComponent implements OnInit {
       this.negative = data.valueOf().Negative;
 
 
-    this.doughnutChartLabels = ['Negative', 'Positive'];
-    this.doughnutChartData = [this.negative,this.positive];
-    //this.doughnutChartType = 'doughnut';
+    this.doughnutChartLabels = ['Positive', 'Negative'];
+    this.doughnutChartData = [this.positive,this.negative];
 
-let arr = [];
-let len = this.videosid.length;
 
-  for(var i=0;i<len;i++) {
-  arr.push({
-    id: this.videosid[i],
-    likes: this.likes[i],
-    dislikes: this.dislikes[i],
-    views: this.views[i],
-    title: this.title[i],
-    comments: this.comments[i],
-    
-  }); 
-
-}
-
-let wdrr = [];
+  //----------------------------------- Push topics to the word cloud ----------------------------------------------------
+    let words = [];
   for(var j=0;j<this.cloudword.length;j++){
-    wdrr.push({'text': this.cloudword[j],'weight': this.cloudwordscore[j]});
+    words.push({'text': this.cloudword[j],'weight': this.cloudwordscore[j]});
   }
-  this.clouddata = wdrr;
+  this.clouddata = words;
 
-console.log('dddd',this.clouddata);
 
-this.videos = [arr];
+  //----------------------------------- Push data to the Barchart ----------------------------------------------------
+  let rawstat1 = [];
+  let rawstat = [];
 
-console.log(this.cloudword);
-console.log('&&&&&', this.videos);
+   for(let l=0; l<this.videosid.length;l++){
+  
+    for(var k=0;k<this.videosid.length;k++) {
+    
+      rawstat.push({'data': [this.likes[k]], 'label':'Likes'});
+      rawstat.push({'data': [this.dislikes[k]], 'label':'Dislikes'});
+      //rawstat.push({'data': [this.views[k]], 'label':'Reach'});
+     
+      rawstat1[k] = rawstat.splice(0,3);
+      
+     }
+      
+   }
+ 
+  this.barChartData = rawstat1;
+
+  //----------------------------------- Send data to the frontend ----------------------------------------------------
+  let finalarray = [];
+  let len = this.videosid.length;
+  
+    for(var i=0;i<len;i++) {
+      finalarray.push({
+      id: this.videosid[i],
+      likes: this.likes[i],
+      dislikes: this.dislikes[i],
+      views: this.views[i],
+      title: this.title[i],
+      comments: this.comments[i],
+      barcharts: this.barChartData[i]
+    }); 
+  
+  }
+    this.videos = [finalarray];
+
+    
+console.log(this.barChartData);
 
 console.log(data);
 });
@@ -168,10 +228,16 @@ console.log(data);
 }
 
   ngOnInit() {
-  //  this.videosService.getVideos().subscribe(resVideosData => this.videos = resVideosData);
-  //  var videos =  this.searchKey();
-  //   console.log('sam is working', videos);
+    // this.userService.sessionOut();
   }
+
+//   logout() {
+//     this.socialAuthService.signOut().then(data => {
+//     // this.userService.logOut();
+//     localStorage.clear();
+//     this.router.navigate(['/login']);
+//  });
+//  }
 
 }
 

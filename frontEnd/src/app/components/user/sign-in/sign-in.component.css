@@ -4,4 +4,9 @@
     margin-right: auto;
     width: 50%;
 }
+
+.bd{
+    border: 10px;
+    border-bottom: 10px;
+}
   
