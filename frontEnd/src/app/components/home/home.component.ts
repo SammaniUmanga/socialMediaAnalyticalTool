@@ -38,14 +38,15 @@ export class HomeComponent implements OnInit {
   negative:any;
   arr: any;
   //ID: any;
+  trendingWords:any;
   userData: any;
 
 
   //-------------------------------------------- Start WORD CLOUD ----------------------------------------------------
   options: CloudOptions = {
     // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value
-    width: 522,
-    height: 295,
+    width: 571,
+    height: 219,
     overflow: false,
     background:'#EEEEEE',
   };
@@ -57,35 +58,34 @@ export class HomeComponent implements OnInit {
   };
 
   clouddata = [
-    {text: 'නවසීලන්ත', weight: 9, color: '#2E86C1'},
-    {text: 'ක්‍රිකට්', weight: 24},
-    {text: 'ක්රිකට් ', weight: 14, color: '#21618C'},
-    {text: 'කුසල් මෙන්ඩිස්', weight: 12, color: '#2874A6'},
-    {text: 'දිනේෂ් චන්දිමාල්', weight: 11, color: '#2E86C1'},
-    {text: 'විකට්', weight: 11, color: '#2E86C1'},
-    {text: 'එක්දින', weight: 13, color: '#2E86C1'},
-    {text: 'නවසීලන්ත', weight: 9, color: '#2E86C1'},
-    {text: 'ක්‍රිකට් ', weight: 5},
-    {text: 'ක්රිකට් ', weight: 10, color: '#2E86C1'},
-    {text: 'කුසල් මෙන්ඩිස්', weight: 12, color: '#2874A6'},
-    {text: 'දිනේෂ් චන්දිමාල්', weight: 11, color: '#2E86C1'},
-    {text: 'දිමුත් කරුණාරත්න', weight: 16, color: '#3498DB'},
-    {text: 'මැතිව්ස් ', weight: 8, color: '#5DADE2'},
-    {text: 'ලංකාව', weight: 10, color: '#85C1E9'},
-    {text: 'ශතක ', weight: 6, color: '#AED6F1'},
-    {text: 'නිරෝෂන් දික්වැල්ල', weight: 10, color: '#2E86C1'},
-    {text: 'සනත් ජයසූරිය', weight: 10, color: '#1B4F72'},
-    {text: 'ටෙස්ට්', weight: 9, color: '#2E86C1'},
-    {text: 'තරග', weight: 10, color: '#1B4F72'},
-    {text: 'පැරදිල', weight: 10, color: '#21618C'},
-    {text: 'ක්‍රිඩා ඇමති', weight: 10, color: '#2874A6'},
-    {text: 'තිරිමාන්න', weight: 15, color: '#2E86C1'},
-    {text: 'දිනුව', weight: 10, color: '#3498DB'},
-    {text: 'කණ්ඩායමකම', weight: 8, color: '#5DADE2'},
-    {text: 'දේශපාලනයට', weight: 9, color: '#85C1E9'},
-    {text: 'ශතක ', weight: 12, color: '#AED6F1'},
-    {text: 'ලෝක කුසලාන', weight: 13, color: '#2E86C1'},
-    {text: 'තරගාවලිය', weight: 11, color: '#1B4F72'}
+    {text: 'පකිස්තානය', weight: 10},
+    {text: 'සුසන්තිකා', weight: 5},
+    //{text: 'ක්රිකට්', weight: 14},
+    {text: 'කුසල් මෙන්ඩිස්', weight: 8},
+    {text: 'දිනේෂ් චන්දිමාල්', weight: 11},
+    {text: 'විකට්', weight: 9},
+    {text: 'එක්දින', weight: 2},
+    // {text: 'නවසීලන්ත', weight: 9},
+    // {text: 'ක්‍රිකට්', weight: 5},
+    // {text: 'පන්දුව', weight: 12},
+    // {text: 'දිනේෂ් චන්දිමාල්', weight: 12},
+    // //{text: 'දිමුත් කරුණාරත්න', weight: 20},
+    {text: 'මැතිව්ස්', weight: 8},
+    // {text: 'ලංකාව', weight: 10},
+    // {text: 'ශතක', weight: 6},
+    {text: 'දික්වැල්ල', weight: 10},
+    // {text: 'සනත් ජයසූරිය', weight: 10},
+    {text: 'ටෙස්ට්', weight: 9},
+    // {text: 'තරග', weight: 10},
+    // //{text: 'පැරදිල', weight: 10},
+    {text: 'ක්‍රිඩා', weight: 12},
+    {text: 'තිරිමාන්න', weight: 15},
+    {text: 'ඇමති', weight: 10},
+    // {text: 'කණ්ඩායමකම', weight: 8},
+    {text: 'දේශපාලනයට', weight: 9},
+    {text: 'රග්බි', weight: 8},
+    // {text: 'ලෝක කුසලාන', weight: 13},
+    // {text: 'තරගාවලිය', weight: 11}
   ];
 
   //clicked cloud word will go to the search bar
@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
   public doughnutChartLabels = ['Positive','Negative'];
   public doughnutChartData = [50,50];
   public doughnutChartType = 'doughnut';
-  public doughnutChartColors: Color[] = [ {backgroundColor: ['#1ABF00','#E90000']} ];
+  public doughnutChartColors: Color[] = [ {backgroundColor: ['#1AA000','#C90000']} ];
   public doughnutChartLegend = true;
   public doughnutChartPlugins = [{
     afterLayout: function (chart) {
@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
   public barChartLabels: string[] = [];
-  public barChartColors: any[] = [{backgroundColor:'#1ABF00'},{backgroundColor:'#E90000'}];
+  public barChartColors: any[] = [{backgroundColor:'#1AA000'},{backgroundColor:'#C90000'}];
   // public barChartColors: any[] = [{backgroundColor:'#1ABF00'},{backgroundColor:'#E90000'},{backgroundColor:'#0000CD'}];
   
   public barChartData: any[] = [
@@ -167,7 +167,7 @@ export class HomeComponent implements OnInit {
       this.cloudwordscore = data.valueOf().Cloudwordscore;
       this.positive = data.valueOf().Positive;
       this.negative = data.valueOf().Negative;
-
+      this.trendingWords = data.valueOf().Trending;
 
     this.doughnutChartLabels = ['Positive', 'Negative'];
     this.doughnutChartData = [this.positive,this.negative];
@@ -221,7 +221,7 @@ export class HomeComponent implements OnInit {
 
     
 console.log(this.barChartData);
-
+console.log(this.trendingWords);
 console.log(data);
 });
       

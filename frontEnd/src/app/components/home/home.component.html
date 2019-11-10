@@ -85,7 +85,7 @@
 
             <!-- START ROW -->
             <div class="row">
-                <div class="col-sm-5 col-md-5">
+                <div class="col-sm-6 col-md-6">
                   <!-- START WIDGET widget_pendingComments.tpl-->
                   <div class="card">
                     <div class="card-header">
@@ -105,7 +105,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-5 col-md-5">
+                  <div class="col-sm-4 col-md-4">
                     <!-- START WIDGET widget_pendingComments.tpl-->
                     <div class=" card">
                       <div class="card-header">
@@ -125,30 +125,15 @@
                   </div>
 
                   <div class="col-sm-2 col-md-2">
-                      <div class=" card">
+                      <div class="card">
                           <div class="card-header">
                               <h5>Trending Words</h5>
                           </div>
-                          <div>
+                          <div *ngFor="let trendingWord of trendingWords">
                               
                                   <table>
                                       <tr>
-                                        <td>John</td>
-                                      </tr>
-                                      <tr>
-                                        <td>Mary</td>
-                                      </tr>
-                                      <tr>
-                                        <td>July</td>
-                                      </tr>
-                                      <tr>
-                                        <td>July</td>
-                                      </tr>
-                                      <tr>
-                                        <td>July</td>
-                                      </tr>
-                                      <tr>
-                                        <td>July</td>
+                                        <td>{{trendingWord}}</td>
                                       </tr>
                                   </table>
                                 
@@ -180,7 +165,7 @@
   <div class="menu videosize" *ngFor="let ane of video">
       <div class="">
       <mat-card>
-        <mat-card class="card-header" style="background-color:rgb(138, 207, 230)">
+        <mat-card style="background-color:rgb(138, 207, 230)">
           <!-- <div mat-card-avatar class="example-header-image"></div> -->
           <b>{{ane.title}}</b>
           <!-- <mat-card-subtitle>{{video.Title.split(' ')[1]}}</mat-card-subtitle> -->
@@ -196,11 +181,13 @@
             </canvas>
           </div>
       </div>
-      <div class="col-sm-2 col-md-2" ><br><br><br><br>
-          <p>Reach : {{ane.views}}</p>
+      <div class="col-sm-2 col-md-2" ><br><br><br>
+        <!-- <button mat class="likebutton">Reach : {{ane.views}}</button> -->
+          <!-- <p style="background-color:rgb(138, 207, 230)">Reach : {{ane.views}}</p> -->
+          <p style="background-color:rgb(241, 250, 255)">Reach : {{ane.views}}</p>
       </div>
       </div>  
-      <div class="card-header" style="background-color:rgb(229, 237, 240)">
+      <div class="card-header" style="background-color:rgb(241, 250, 255)">
           <p>
             {{ane.comments}}
           </p>
@@ -211,7 +198,7 @@
           
         </mat-card-actions>
       </mat-card>
-      </div><br>
+      </div>
     </div>
     </li>
   </ul>
