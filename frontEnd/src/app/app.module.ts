@@ -52,7 +52,7 @@ import { AuthInterceptor  } from './auth/auth.interceptor';
 import { SafePipe } from './safe.pipe';
 import { FilterPipe } from './filter.pipe';
 import { TagCloudModule } from 'angular-tag-cloud-module';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const routes: Routes = [
 
@@ -92,7 +92,7 @@ export function provideConfig(){
     FilterPipe,
     TrendingVideoComponent,
     WordCloudComponent
-
+    
   ],
   imports: [
     BrowserModule,
@@ -115,7 +115,8 @@ export function provideConfig(){
     HttpClientModule,
     SocialLoginModule,
     AngularFontAwesomeModule,
-    TagCloudModule
+    TagCloudModule,
+    NgxSpinnerModule
   ],
   exports: [
     ChartsModule,

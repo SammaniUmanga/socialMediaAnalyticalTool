@@ -13,12 +13,14 @@ import { Router } from "@angular/router";
 import { UserService } from '../../shared/user.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
 
 
@@ -45,10 +47,10 @@ export class HomeComponent implements OnInit {
   //-------------------------------------------- Start WORD CLOUD ----------------------------------------------------
   options: CloudOptions = {
     // if width is between 0 and 1 it will be set to the size of the upper element multiplied by the value
-    width: 571,
-    height: 219,
+    width: 1,
+    height: 295,
     overflow: false,
-    background:'#EEEEEE',
+    //background:'#EEEEEE',
   };
 
   zoomOnHoverOptions: ZoomOnHoverOptions = {
@@ -58,32 +60,32 @@ export class HomeComponent implements OnInit {
   };
 
   clouddata = [
-    {text: 'පකිස්තානය', weight: 10},
-    {text: 'සුසන්තිකා', weight: 5},
+    {text: 'පකිස්තානය', weight: 3},
+    {text: 'සුසන්තිකා', weight: 4},
     //{text: 'ක්රිකට්', weight: 14},
-    {text: 'කුසල් මෙන්ඩිස්', weight: 8},
-    {text: 'දිනේෂ් චන්දිමාල්', weight: 11},
-    {text: 'විකට්', weight: 9},
+    {text: 'කුසල් මෙන්ඩිස්', weight: 3},
+    {text: 'දිනේෂ් චන්දිමාල්', weight: 2},
+    {text: 'විකට්', weight: 3},
     {text: 'එක්දින', weight: 2},
     // {text: 'නවසීලන්ත', weight: 9},
-    // {text: 'ක්‍රිකට්', weight: 5},
+    {text: 'ක්‍රිකට්', weight: 3},
     // {text: 'පන්දුව', weight: 12},
     // {text: 'දිනේෂ් චන්දිමාල්', weight: 12},
-    // //{text: 'දිමුත් කරුණාරත්න', weight: 20},
-    {text: 'මැතිව්ස්', weight: 8},
+    {text: 'දිමුත් කරුණාරත්න', weight: 3},
+    {text: 'මැතිව්ස්', weight: 4},
     // {text: 'ලංකාව', weight: 10},
-    // {text: 'ශතක', weight: 6},
-    {text: 'දික්වැල්ල', weight: 10},
+    {text: 'ශතක', weight: 2},
+    {text: 'දික්වැල්ල', weight: 3},
     // {text: 'සනත් ජයසූරිය', weight: 10},
-    {text: 'ටෙස්ට්', weight: 9},
+    {text: 'ටෙස්ට්', weight: 2},
     // {text: 'තරග', weight: 10},
     // //{text: 'පැරදිල', weight: 10},
-    {text: 'ක්‍රිඩා', weight: 12},
-    {text: 'තිරිමාන්න', weight: 15},
-    {text: 'ඇමති', weight: 10},
+    {text: 'ක්‍රිඩා', weight: 5},
+    {text: 'තිරිමාන්න', weight: 3},
+    {text: 'ඇමති', weight: 3},
     // {text: 'කණ්ඩායමකම', weight: 8},
-    {text: 'දේශපාලනයට', weight: 9},
-    {text: 'රග්බි', weight: 8},
+    {text: 'දේශපාලනය', weight: 4},
+    {text: 'රග්බි', weight: 3},
     // {text: 'ලෝක කුසලාන', weight: 13},
     // {text: 'තරගාවලිය', weight: 11}
   ];
@@ -95,6 +97,12 @@ export class HomeComponent implements OnInit {
 
   //-------------------------------------------- End WORD CLOUD ----------------------------------------------------
 
+  // showSpinner() {
+  //   this.spinner.show(undefined, { fullScreen: true });
+  //   setTimeout(() => {
+  //     this.spinner.hide();
+  //   }, 5000);
+  // }
 
   //-------------------------------------------- Start Doughnut Chart ----------------------------------------------------
   
@@ -141,7 +149,7 @@ export class HomeComponent implements OnInit {
   
   
   constructor(private videosService:VideosService, private searchService:SearchService,private httpClient: HttpClient, private router : Router, 
-    private socialAuthService: AuthService, private userService: UserService) 
+    private socialAuthService: AuthService, private userService: UserService, private spinner: NgxSpinnerService) 
     {
       // this.userData = this.userService.getData();
       
@@ -150,6 +158,7 @@ export class HomeComponent implements OnInit {
      
   //-------------------------------------------- Start search function ----------------------------------------------------
   searchKey() {
+    this.spinner.show(undefined, { fullScreen: true });
     
     let postKey = this.search
     console.log(postKey);
@@ -171,6 +180,8 @@ export class HomeComponent implements OnInit {
 
     this.doughnutChartLabels = ['Positive', 'Negative'];
     this.doughnutChartData = [this.positive,this.negative];
+
+    
 
 
   //----------------------------------- Push topics to the word cloud ----------------------------------------------------
@@ -223,8 +234,12 @@ export class HomeComponent implements OnInit {
 console.log(this.barChartData);
 console.log(this.trendingWords);
 console.log(data);
+// if(data){
+  this.spinner.hide();
+// }
+
 });
-      
+
 }
 
   ngOnInit() {
